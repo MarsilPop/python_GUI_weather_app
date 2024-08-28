@@ -125,7 +125,19 @@ class WeatherApp(QWidget):
         self.temperature_label.setText(message)
 
     def display_weather(self, data):
-        print(data)
+        self.temperature_label.setStyleSheet("font-size: 75px;")
+        temperature_k = data["main"]["temp"]
+        # temperature in Celcius
+        temperature_c = temperature_k - 273.15
+        # temperature in Fahrenheit
+        temperature_f = (temperature_k * 9 / 5) -459.67
+        weather_description = data["weather"][0]["description"]
+        
+        self.temperature_label.setText(f"{temperature_c:.0f}°C")
+        self.description_label.setText(weather_description)
+
+    def get_weather_emoji(weather_id):
+        pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
